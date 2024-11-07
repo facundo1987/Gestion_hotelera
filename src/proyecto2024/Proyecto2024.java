@@ -97,10 +97,13 @@ public class Proyecto2024 {
                                     System.out.println("Nacionalidad:" + " " + pasajeros.get(x).nacionalidad);
                                     System.out.println("Edad:" + " " + pasajeros.get(x).edad);
 
+                                }else{
+                                
+                                System.out.println("Pasajero no encontrado ");
                                 }
                             }
 
-                            System.out.println("Pasajero no encontrado ");
+                            
 
                         }
 
