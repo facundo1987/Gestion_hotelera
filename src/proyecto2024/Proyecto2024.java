@@ -5,6 +5,8 @@ import java.util.*;
 public class Proyecto2024 {
 
     public static void main(String[] args) {
+        
+        System.out.println("hola mundo");
 
         ArrayList<Pasajero> pasajeros = new ArrayList();
             System.out.println("Hola mundo");
