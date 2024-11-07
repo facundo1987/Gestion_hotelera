@@ -1,20 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package proyecto2024;
 
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author 46390835
- */
+
 public class Proyecto2024 {
 
     public static void main(String[] args) {
+        System.out.println("hola");
 
         ArrayList<Pasajero> pasajeros = new ArrayList();
         Pasajero huesped_1 = new Pasajero("Facundo", "Bustamante", "Uruguay", 37);
@@ -160,11 +155,12 @@ public class Proyecto2024 {
                         break;
                 }
            
-
+                
               
         }
 
     }
-
+        
 }
+    
 }
