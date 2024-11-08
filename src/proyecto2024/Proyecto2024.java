@@ -7,6 +7,7 @@ public class Proyecto2024 {
     public static void main(String[] args) {
 
         ArrayList<Pasajero> pasajeros = new ArrayList();
+            System.out.println("Hola mundo");
 
         //Agregamos pasajeros para poder testear luego el sistema
         Pasajero huesped_1 = new Pasajero("Facundo", "Bustamante", "Uruguay", 37);
