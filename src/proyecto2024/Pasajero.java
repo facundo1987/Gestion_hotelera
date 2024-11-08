@@ -8,13 +8,14 @@ public class Pasajero {
 
     String nombre;
     String apellido;
+    int dni;
     String nacionalidad;
     int edad;
-
-    public Pasajero(String nombre, String apellido, String nacionalidad, int edad) {
+    public Pasajero(String nombre, String apellido, int dni, String nacionalidad, int edad) {
 
         this.nombre = nombre;
         this.apellido = apellido;
+        this.dni = dni;
         this.nacionalidad = nacionalidad;
         this.edad = edad;
     }
@@ -37,6 +38,14 @@ public class Pasajero {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
     }
 
     public void setApellido(String apellido) {

@@ -26,31 +26,33 @@ public class Metodos {
         String nombre = input.nextLine();
         System.out.println("Cual es el apellido del pasajero  ");
         String apellido = input.nextLine();
+        System.out.println("ingrese dni ");
+        int dni = input.nextInt();
         System.out.println("Ingrese nacionalidad  ");
         String nacionalidad = input.nextLine();
         System.out.println("ingrese edad ");
         int edad = input.nextInt();
 
-        Pasajero pasajero_nuevo = new Pasajero(nombre, apellido, nacionalidad, edad);
+        Pasajero pasajero_nuevo = new Pasajero(nombre, apellido,dni, nacionalidad, edad);
 
         return pasajero_nuevo;
     }
 
     public static void consultaPasajero(ArrayList<Pasajero> pasajeros) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Seleccione el apellido del pasajero que desea ver ");
+        System.out.println("Seleccione el dni del pasajero que desea ver ");
         input.nextLine();
-        String resp = input.nextLine();
+        int resp = input.nextInt();
         int x = 0;
 
         if (pasajeros.isEmpty()) {
             System.out.println("No hay pasajeros ingresados en el sistema");
         } else {
-            while (!resp.equalsIgnoreCase(pasajeros.get(x).apellido)) {
+            while (resp != pasajeros.get(x).dni) {
 
                 x++;
 
-                if (resp.equalsIgnoreCase(pasajeros.get(x).apellido)) {
+                if (resp != pasajeros.get(x).dni);
 
                     System.out.println("Nombre:" + " " + pasajeros.get(x).nombre);
                     System.out.println("Apellido:" + " " + pasajeros.get(x).apellido);
