@@ -5,7 +5,7 @@ import java.util.*;
 public class Metodos {
 
     //Msj para menu general de gestiones
-    // probando git shana
+    // probando git nnnnnn
     public static void panelGestionGeneral() {
         System.out.println("Bienvenido al menu general del sistema hotelero ");
         System.out.println("1 ---- Pasajeros");
