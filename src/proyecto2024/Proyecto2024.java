@@ -5,11 +5,8 @@ import java.util.*;
 public class Proyecto2024 {
 
     public static void main(String[] args) {
-        
-       
 
         ArrayList<Pasajero> pasajeros = new ArrayList();
-          
 
         //Agregamos pasajeros para poder testear luego el sistema
         Pasajero huesped_1 = new Pasajero("Facundo", "Bustamante", 46390835, "Uruguay", 37);
@@ -18,15 +15,25 @@ public class Proyecto2024 {
         Pasajero huesped_2 = new Pasajero("Gonzalo", "Bergessio", 55667831, "Argentina", 40);
         pasajeros.add(huesped_2);
 
-        Pasajero huesped_3 = new Pasajero("Rosa", "Melano",44233958, "Francia", 22);
+        Pasajero huesped_3 = new Pasajero("Rosa", "Melano", 44233958, "Francia", 22);
         pasajeros.add(huesped_3);
 
-        Pasajero huesped_4 = new Pasajero("Sabrina", "Rojas",123456, "Argentina", 44);
+        Pasajero huesped_4 = new Pasajero("Sabrina", "Rojas", 123456, "Argentina", 44);
         pasajeros.add(huesped_4);
 
-        Pasajero huesped_5 = new Pasajero("Gilberto", "Gil",44356541, "Brasil", 82);
+        Pasajero huesped_5 = new Pasajero("Gilberto", "Gil", 44356541, "Brasil", 82);
         pasajeros.add(huesped_5);
         // fin de los casos de prueba
+
+        //Agregamos habitaciones para poder testear luego el sistema
+        ArrayList<Habitacion> habitaciones = new ArrayList();
+
+        Habitacion habitacion_1 = new Habitacion("Premium", 103, 80.0);
+        habitaciones.add(habitacion_1);
+        Habitacion habitacion_2 = new Habitacion("Excecutive", 201, 50.0);
+        habitaciones.add(habitacion_2);
+        Habitacion habitacion_3 = new Habitacion("Suite", 1002, 120.0);
+        habitaciones.add(habitacion_3);
 
         Scanner input = new Scanner(System.in);
         int opcion;
@@ -53,7 +60,7 @@ public class Proyecto2024 {
 
                             System.out.println("Huesped agregado con exito!");
                             break;
-                            
+
                         case 2:
 
                             Metodos.consultaPasajero(pasajeros);
@@ -74,6 +81,44 @@ public class Proyecto2024 {
                             System.out.println("Opcion no valida, ingrese una opcion correcta ");
                             break;
                     }
+                    
+                case 2:
+                    
+                    //mostramos panel de habitaciones
+                    Metodos.panelHabitaciones();
+                    opcion = input.nextInt();
+                        switch(opcion){
+                            
+                            case 1:
+                      
+                            habitaciones.add(Metodos.nuevaHabitacion());
+
+                            System.out.println("Habitacion creada con exito!");
+                            break;
+                            
+                             case 2:
+
+                            Metodos.consultaHabitacion(habitaciones);
+                            break;
+
+                        case 3:
+
+                            Metodos.editarHabitacion(habitaciones);
+                            break;
+
+                        case 4:
+
+                            int cont = Metodos.eliminarHabitacion(habitaciones);
+                            pasajeros.remove(cont);
+                            break;
+
+                        default:
+                            System.out.println("Opcion no valida, ingrese una opcion correcta ");
+                            break;
+                                
+                                
+                            
+                        }
             }
 
         }

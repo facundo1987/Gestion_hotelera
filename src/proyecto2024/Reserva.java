@@ -69,7 +69,7 @@ public class Reserva {
     
     //metodo para calcular el precio final de la reserva
     public double precioTotal (Habitacion habitacion){
-        double precioTotal = (habitacion.getPrecio())*(dias());
+        double precioTotal = (habitacion.tarifa)*(dias());
         return precioTotal;
     }
 }

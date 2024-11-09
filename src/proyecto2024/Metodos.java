@@ -1,8 +1,11 @@
 package proyecto2024;
 
 import java.util.*;
+import java.util.Random;
 
 public class Metodos {
+    
+    
     // Joptionpane.showinputdialog
     //Msj para menu general de gestiones
     // probando git nnnnnn
@@ -20,6 +23,14 @@ public class Metodos {
         System.out.println("3---- Editar pasajero");
         System.out.println("4 ---- Borrar pasajero");
     }
+    
+      public static void panelHabitaciones() {
+        System.out.println("1 ---- Crear nuevo habitacion");
+        System.out.println("2 ---- Ver habitacion");
+        System.out.println("3---- Editar habitacion");
+        System.out.println("4 ---- Borrar habitacion");
+    }
+    //metodos de la clase pasajero
 
     public static Pasajero ingresarPasajero() {
         Scanner input = new Scanner(System.in);
@@ -129,4 +140,97 @@ public class Metodos {
         }
         return cont;
     }
+    
+    // CRUD de habitacion
+    
+    public static Habitacion nuevaHabitacion(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Ingrese el tipo de habitacion ");
+        String tipo_habitacion = input.nextLine();
+        System.out.println("Ingrese el numero de habitacion ");
+        int numero_habitacion = input.nextInt();
+        System.out.println("Seleccione la tarifa ");
+        double tarifa = input.nextDouble();
+        
+        Habitacion habitacion_nueva = new Habitacion (tipo_habitacion, numero_habitacion, tarifa);
+        
+        return habitacion_nueva;
+        
+    }
+    
+      public static void consultaHabitacion(ArrayList<Habitacion> habitaciones) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Seleccione el numero de habitacion que desea ver ");
+        int resp = input.nextInt();
+        int x = 0;
+
+        if (habitaciones.isEmpty()) {
+            System.out.println("No hay habitaciones ingresadas en el sistema");
+        } else {
+            while (resp != habitaciones.get(x).numero_habitacion) {
+
+                x++;
+
+                if (resp == habitaciones.get(x).numero_habitacion){
+
+                    System.out.println("Tipo de habitacion:" + " " + habitaciones.get(x).tipo_habitacion);
+                    System.out.println("Numero de habitacion:" + " " + habitaciones.get(x).numero_habitacion);
+                    System.out.println("Tarifa:" + " " + habitaciones.get(x).tarifa);
+
+                } else {
+
+                    System.out.println("Habitacion no encontrada ");
+                }
+            }
+
+        }
+
+    }
+      
+      public static void editarHabitacion(ArrayList<Habitacion> habitaciones) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Ingrese el numero de habitacion que desea editar: ");
+        
+        int respuesta_modificar = input.nextInt();
+        int contador = 0;
+
+        while (respuesta_modificar != habitaciones.get(contador).numero_habitacion) {
+
+            contador++;
+        }
+        if (contador < habitaciones.size()) {
+
+
+            System.out.println("Ingrese el nuevo tipo de habitacion: ");
+            String nuevo_tipo = input.nextLine();
+            habitaciones.get(contador).setTipo_habitacion(nuevo_tipo);
+            input.nextLine();
+            
+            System.out.println("Ingrese la nueva tarifa: ");
+            int nueva_tarifa = input.nextInt();
+            habitaciones.get(contador).setTarifa(nueva_tarifa);
+            
+            System.out.println("Nueva habitacion creada con exito! ");
+
+        } else {
+            System.out.println("La habitacion consultada no se encontro en la base");
+        }
+    }
+          public static int eliminarHabitacion(ArrayList<Habitacion> habitaciones) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Seleccione el numero de habitacion que desea borrar ");
+        int respuesta_eliminar = input.nextInt();
+        int cont = 0;
+
+        while (respuesta_eliminar != habitaciones.get(cont).numero_habitacion) {
+            cont++;
+        }
+        if (cont<habitaciones.size()){
+            System.out.println("Tipo de habitacion eliminada con exito!");
+        }else{
+            System.out.println("Este tipo de habitacion no existe en la base, no hay datos para eliminar");
+        }
+        return cont;
+    }
+
 }
