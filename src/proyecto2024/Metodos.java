@@ -3,7 +3,7 @@ package proyecto2024;
 import java.util.*;
 
 public class Metodos {
-
+    // Joptionpane.showinputdialog
     //Msj para menu general de gestiones
     // probando git nnnnnn
     public static void panelGestionGeneral() {
@@ -31,6 +31,7 @@ public class Metodos {
         int dni = input.nextInt();
         System.out.println("Ingrese nacionalidad  ");
         String nacionalidad = input.nextLine();
+        input.nextLine();
         System.out.println("ingrese edad ");
         int edad = input.nextInt();
 
@@ -42,7 +43,6 @@ public class Metodos {
     public static void consultaPasajero(ArrayList<Pasajero> pasajeros) {
         Scanner input = new Scanner(System.in);
         System.out.println("Seleccione el dni del pasajero que desea ver ");
-        input.nextLine();
         int resp = input.nextInt();
         int x = 0;
 
@@ -53,7 +53,7 @@ public class Metodos {
 
                 x++;
 
-                if (resp != pasajeros.get(x).dni){
+                if (resp == pasajeros.get(x).dni){
 
                     System.out.println("Nombre:" + " " + pasajeros.get(x).nombre);
                     System.out.println("Apellido:" + " " + pasajeros.get(x).apellido);
@@ -74,7 +74,7 @@ public class Metodos {
     public static void editarPasajero(ArrayList<Pasajero> pasajeros) {
         Scanner input = new Scanner(System.in);
         System.out.println("Ingrese el dni del pasajero que desea editar: ");
-        input.nextLine();
+        
         int respuesta_modificar = input.nextInt();
         int contador = 0;
 
@@ -87,6 +87,7 @@ public class Metodos {
             System.out.println("Ingrese el nuevo nombre del pasajero:");
             String nuevoNombre = input.nextLine();
             pasajeros.get(contador).setNombre(nuevoNombre);
+            input.nextLine();
 
             System.out.println("Ingrese el nuevo apellido del pasajero:");
             String nuevoApellido = input.nextLine();
@@ -99,7 +100,8 @@ public class Metodos {
             System.out.println("Ingrese la nueva nacionalidad del pasajero:");
             String nuevaNacionalidad = input.nextLine();
             pasajeros.get(contador).setNacionalidad(nuevaNacionalidad);
-
+            input.nextLine();
+            
             System.out.println("Ingrese la nueva edad del pasajero:");
             int nuevaEdad = input.nextInt();
             pasajeros.get(contador).setEdad(nuevaEdad);
@@ -114,7 +116,6 @@ public class Metodos {
     public static int eliminarPasajero(ArrayList<Pasajero> pasajeros) {
         Scanner input = new Scanner(System.in);
         System.out.println("Seleccione dni del pasajero que desea borrar ");
-        input.nextLine();
         int respuesta_eliminar = input.nextInt();
         int cont = 0;
 

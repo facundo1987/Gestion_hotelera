@@ -52,6 +52,8 @@ public class Proyecto2024 {
                             pasajeros.add(Metodos.ingresarPasajero());
 
                             System.out.println("Huesped agregado con exito!");
+                            break;
+                            
                         case 2:
 
                             Metodos.consultaPasajero(pasajeros);
