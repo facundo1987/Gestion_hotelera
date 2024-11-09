@@ -6,25 +6,25 @@ public class Proyecto2024 {
 
     public static void main(String[] args) {
         
-        System.out.println("hola mundo");
+       
 
         ArrayList<Pasajero> pasajeros = new ArrayList();
-            System.out.println("Hola mundo");
+          
 
         //Agregamos pasajeros para poder testear luego el sistema
-        Pasajero huesped_1 = new Pasajero("Facundo", "Bustamante", "Uruguay", 37);
+        Pasajero huesped_1 = new Pasajero("Facundo", "Bustamante", 46390835, "Uruguay", 37);
         pasajeros.add(huesped_1);
 
-        Pasajero huesped_2 = new Pasajero("Gonzalo", "Bergessio", "Argentina", 40);
+        Pasajero huesped_2 = new Pasajero("Gonzalo", "Bergessio", 55667831, "Argentina", 40);
         pasajeros.add(huesped_2);
 
-        Pasajero huesped_3 = new Pasajero("Rosa", "Melano", "Francia", 22);
+        Pasajero huesped_3 = new Pasajero("Rosa", "Melano",44233958, "Francia", 22);
         pasajeros.add(huesped_3);
 
-        Pasajero huesped_4 = new Pasajero("Sabrina", "Rojas", "Argentina", 44);
+        Pasajero huesped_4 = new Pasajero("Sabrina", "Rojas",123456, "Argentina", 44);
         pasajeros.add(huesped_4);
 
-        Pasajero huesped_5 = new Pasajero("Gilberto", "Gil", "Brasil", 82);
+        Pasajero huesped_5 = new Pasajero("Gilberto", "Gil",44356541, "Brasil", 82);
         pasajeros.add(huesped_5);
         // fin de los casos de prueba
 

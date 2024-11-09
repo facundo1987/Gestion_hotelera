@@ -53,10 +53,11 @@ public class Metodos {
 
                 x++;
 
-                if (resp != pasajeros.get(x).dni);
+                if (resp != pasajeros.get(x).dni){
 
                     System.out.println("Nombre:" + " " + pasajeros.get(x).nombre);
                     System.out.println("Apellido:" + " " + pasajeros.get(x).apellido);
+                    System.out.println("Dni:" + " " + pasajeros.get(x).dni);
                     System.out.println("Nacionalidad:" + " " + pasajeros.get(x).nacionalidad);
                     System.out.println("Edad:" + " " + pasajeros.get(x).edad);
 
@@ -72,12 +73,12 @@ public class Metodos {
 
     public static void editarPasajero(ArrayList<Pasajero> pasajeros) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Ingrese el apellido del pasajero que desea editar: ");
+        System.out.println("Ingrese el dni del pasajero que desea editar: ");
         input.nextLine();
-        String respuesta_modificar = input.nextLine();
+        int respuesta_modificar = input.nextInt();
         int contador = 0;
 
-        while (!respuesta_modificar.equalsIgnoreCase(pasajeros.get(contador).apellido)) {
+        while (respuesta_modificar != pasajeros.get(contador).dni) {
 
             contador++;
         }
@@ -89,6 +90,10 @@ public class Metodos {
 
             System.out.println("Ingrese el nuevo apellido del pasajero:");
             String nuevoApellido = input.nextLine();
+            pasajeros.get(contador).setApellido(nuevoApellido);
+            
+            System.out.println("Ingrese el nuevo dni del pasajero:");
+            int nuevoDni = input.nextInt();
             pasajeros.get(contador).setApellido(nuevoApellido);
 
             System.out.println("Ingrese la nueva nacionalidad del pasajero:");
@@ -108,12 +113,12 @@ public class Metodos {
 
     public static int eliminarPasajero(ArrayList<Pasajero> pasajeros) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Seleccione apellido del pasajero que desea borrar ");
+        System.out.println("Seleccione dni del pasajero que desea borrar ");
         input.nextLine();
-        String respuesta_eliminar = input.nextLine();
+        int respuesta_eliminar = input.nextInt();
         int cont = 0;
 
-        while (!respuesta_eliminar.equalsIgnoreCase(pasajeros.get(cont).apellido)) {
+        while (respuesta_eliminar != pasajeros.get(cont).dni) {
             cont++;
         }
         if (cont<pasajeros.size()){
