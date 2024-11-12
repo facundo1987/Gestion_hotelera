@@ -13,15 +13,25 @@ public class Habitacion {
     String tipo_habitacion;
     int numero_habitacion;
     double tarifa;
+    String estado;
     
     
-    public Habitacion (String tipo_habitacion, int numero_habitacion, double tarifa){
+    public Habitacion (String tipo_habitacion, int numero_habitacion, double tarifa, String estado){
         
         this.tipo_habitacion = tipo_habitacion;
         this.numero_habitacion = numero_habitacion;
         this.tarifa = tarifa;
+        this.estado = estado;
     
     
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getTipo_habitacion() {

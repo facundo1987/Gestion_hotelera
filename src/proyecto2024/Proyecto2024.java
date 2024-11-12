@@ -1,10 +1,11 @@
 package proyecto2024;
 
+import java.text.ParseException;
 import java.util.*;
 
 public class Proyecto2024 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
         ArrayList<Pasajero> pasajeros = new ArrayList();
 
@@ -28,19 +29,22 @@ public class Proyecto2024 {
         //Agregamos habitaciones para poder testear luego el sistema
         ArrayList<Habitacion> habitaciones = new ArrayList();
 
-        Habitacion habitacion_1 = new Habitacion("Premium", 103, 80.0);
+        Habitacion habitacion_1 = new Habitacion("Premium", 103, 80.0, "Disponible");
         habitaciones.add(habitacion_1);
-        Habitacion habitacion_2 = new Habitacion("Excecutive", 201, 50.0);
+        Habitacion habitacion_2 = new Habitacion("Excecutive", 201, 50.0, "En mantenimiento");
         habitaciones.add(habitacion_2);
-        Habitacion habitacion_3 = new Habitacion("Suite", 1002, 120.0);
+        Habitacion habitacion_3 = new Habitacion("Suite", 302, 120.0, "Ocupada");
         habitaciones.add(habitacion_3);
+
+        //Lista de reservas y agregamos un caso para prueba
+        ArrayList<Reserva> reservas = new ArrayList();
 
         Scanner input = new Scanner(System.in);
         int opcion;
         int option;
-        boolean bandera = false;  // NO SE ESTA UTILIZANDO, CONSULTAR A FACU SU IDDEA
+        boolean continuo = true;  // NO SE ESTA UTILIZANDO, CONSULTAR A FACU SU IDDEA
 
-        while (true) {
+        while (continuo) {
             //mostramos panel general
             Metodos.panelGestionGeneral();
             option = input.nextInt();
@@ -81,22 +85,22 @@ public class Proyecto2024 {
                             System.out.println("Opcion no valida, ingrese una opcion correcta ");
                             break;
                     }
-                    
+                    break;
                 case 2:
-                    
+
                     //mostramos panel de habitaciones
                     Metodos.panelHabitaciones();
                     opcion = input.nextInt();
-                        switch(opcion){
-                            
-                            case 1:
-                      
+                    switch (opcion) {
+
+                        case 1:
+
                             habitaciones.add(Metodos.nuevaHabitacion());
 
                             System.out.println("Habitacion creada con exito!");
                             break;
-                            
-                             case 2:
+
+                        case 2:
 
                             Metodos.consultaHabitacion(habitaciones);
                             break;
@@ -115,10 +119,31 @@ public class Proyecto2024 {
                         default:
                             System.out.println("Opcion no valida, ingrese una opcion correcta ");
                             break;
-                                
-                                
-                            
-                        }
+
+                    }
+
+                    break;
+                case 3:
+                    Metodos.panelReservas();
+                    opcion = input.nextInt();
+
+                    switch (opcion) {
+                        case 1:
+                            reservas.add(Metodos.ingresarReserva(pasajeros, habitaciones));
+
+                            System.out.println("Reserva ingresada al sistema correctamente");
+                            break;
+                        case 2:
+                            Metodos.modificarReserva(reservas, habitaciones);
+                            break;
+                        case 3:
+
+                            break;
+                        case 4:
+
+                            break;
+                    }
+
             }
 
         }
