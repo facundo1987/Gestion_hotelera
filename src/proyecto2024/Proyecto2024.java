@@ -31,7 +31,7 @@ public class Proyecto2024 {
 
         Habitacion habitacion_1 = new Habitacion("Premium", 103, 80.0, "Disponible");
         habitaciones.add(habitacion_1);
-        Habitacion habitacion_2 = new Habitacion("Excecutive", 201, 50.0, "En mantenimiento");
+        Habitacion habitacion_2 = new Habitacion("Excecutive", 201, 50.0, "Disponible");
         habitaciones.add(habitacion_2);
         Habitacion habitacion_3 = new Habitacion("Suite", 302, 120.0, "Ocupada");
         habitaciones.add(habitacion_3);
@@ -113,7 +113,7 @@ public class Proyecto2024 {
                         case 4:
 
                             int cont = Metodos.eliminarHabitacion(habitaciones);
-                            pasajeros.remove(cont);
+                            habitaciones.remove(cont);
                             break;
 
                         default:
@@ -137,7 +137,7 @@ public class Proyecto2024 {
                             Metodos.modificarReserva(reservas, habitaciones);
                             break;
                         case 3:
-
+                            Metodos.consultarReserva(reservas);
                             break;
                         case 4:
 
