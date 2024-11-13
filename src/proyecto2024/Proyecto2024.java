@@ -77,8 +77,8 @@ public class Proyecto2024 {
 
                         case 4:
 
-                            int cont = Metodos.eliminarPasajero(pasajeros);
-                            pasajeros.remove(cont);
+                            Metodos.eliminarPasajero(pasajeros);
+
                             break;
 
                         default:
@@ -112,8 +112,7 @@ public class Proyecto2024 {
 
                         case 4:
 
-                            int cont = Metodos.eliminarHabitacion(habitaciones);
-                            habitaciones.remove(cont);
+                            Metodos.eliminarHabitacion(habitaciones);
                             break;
 
                         default:
@@ -140,10 +139,17 @@ public class Proyecto2024 {
                             Metodos.consultarReserva(reservas);
                             break;
                         case 4:
+                            Metodos.eliminarReserva(reservas);
 
                             break;
-                    }
 
+                    }
+                    break;
+                    
+                case 4:
+                    System.out.println("Gracias por elegir Gestion Hotelera!");
+                    continuo = false;
+                    break;
             }
 
         }

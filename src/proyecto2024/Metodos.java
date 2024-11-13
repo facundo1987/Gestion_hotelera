@@ -17,21 +17,21 @@ public class Metodos {
         System.out.println("3 ---- Reservas");
         System.out.println("4 ---- Salir");
     }
-    
+
     public static void panelPasajeros() {
         System.out.println("1 ---- Ingresar nuevo pasajero");
         System.out.println("2 ---- Consultar pasajero");
         System.out.println("3---- Editar pasajero");
         System.out.println("4 ---- Borrar pasajero");
     }
-    
+
     public static void panelHabitaciones() {
         System.out.println("1 ---- Crear nueva habitacion");
         System.out.println("2 ---- Ver habitacion");
         System.out.println("3---- Editar habitacion");
         System.out.println("4 ---- Borrar habitacion");
     }
-    
+
     public static void panelReservas() {
         System.out.println("1 ---- Ingresar nueva reserva");
         System.out.println("2 ---- Modificar reserva");
@@ -53,100 +53,102 @@ public class Metodos {
         input.nextLine();
         System.out.println("ingrese edad ");
         int edad = input.nextInt();
-        
+
         Pasajero pasajero_nuevo = new Pasajero(nombre, apellido, dni, nacionalidad, edad);
-        
+
         return pasajero_nuevo;
     }
-    
+
     public static void consultaPasajero(ArrayList<Pasajero> pasajeros) {
         Scanner input = new Scanner(System.in);
         System.out.println("Seleccione el dni del pasajero que desea ver ");
         int resp = input.nextInt();
         int x = 0;
-        
+
         if (pasajeros.isEmpty()) {
             System.out.println("No hay pasajeros ingresados en el sistema");
         } else {
             while (resp != pasajeros.get(x).dni) {
-                
+
                 x++;
-                
+
                 if (resp == pasajeros.get(x).dni) {
-                    
+
                     System.out.println("Nombre:" + " " + pasajeros.get(x).nombre);
                     System.out.println("Apellido:" + " " + pasajeros.get(x).apellido);
                     System.out.println("Dni:" + " " + pasajeros.get(x).dni);
                     System.out.println("Nacionalidad:" + " " + pasajeros.get(x).nacionalidad);
                     System.out.println("Edad:" + " " + pasajeros.get(x).edad);
-                    
+
                 } else {
-                    
+
                     System.out.println("Pasajero no encontrado ");
                 }
             }
-            
+
         }
-        
+
     }
-    
+
     public static void editarPasajero(ArrayList<Pasajero> pasajeros) {
         Scanner input = new Scanner(System.in);
         System.out.println("Ingrese el dni del pasajero que desea editar: ");
-        
+
         int respuesta_modificar = input.nextInt();
         int contador = 0;
-        
+
         while (respuesta_modificar != pasajeros.get(contador).dni) {
-            
+
             contador++;
         }
         if (contador < pasajeros.size()) {
-            
+
             System.out.println("Ingrese el nuevo nombre del pasajero:");
             String nuevoNombre = input.nextLine();
             pasajeros.get(contador).setNombre(nuevoNombre);
             input.nextLine();
-            
+
             System.out.println("Ingrese el nuevo apellido del pasajero:");
             String nuevoApellido = input.nextLine();
             pasajeros.get(contador).setApellido(nuevoApellido);
-            
+
             System.out.println("Ingrese el nuevo dni del pasajero:");
             int nuevoDni = input.nextInt();
             pasajeros.get(contador).setApellido(nuevoApellido);
-            
+
             System.out.println("Ingrese la nueva nacionalidad del pasajero:");
             String nuevaNacionalidad = input.nextLine();
             pasajeros.get(contador).setNacionalidad(nuevaNacionalidad);
             input.nextLine();
-            
+
             System.out.println("Ingrese la nueva edad del pasajero:");
             int nuevaEdad = input.nextInt();
             pasajeros.get(contador).setEdad(nuevaEdad);
-            
+
             System.out.println("El pasajero ha sido editado con exito.");
-            
+
         } else {
             System.out.println("El pasajero consultado no se encontro en la base");
         }
     }
-    
-    public static int eliminarPasajero(ArrayList<Pasajero> pasajeros) {
+
+    public static void eliminarPasajero(ArrayList<Pasajero> pasajeros) {
         Scanner input = new Scanner(System.in);
         System.out.println("Seleccione dni del pasajero que desea borrar ");
         int respuesta_eliminar = input.nextInt();
-        int cont = 0;
-        
-        while (respuesta_eliminar != pasajeros.get(cont).dni) {
-            cont++;
+        boolean existe_pasajero = false;
+
+        for (int i = 0; i < pasajeros.size(); i++) {
+            if (respuesta_eliminar == pasajeros.get(i).dni) {
+                pasajeros.remove(i);
+                System.out.println("Pasajero eliminado con exito ");
+                existe_pasajero = true;
+                break;
+            }
+            if (!existe_pasajero) {
+                System.out.println("Este pasajero no existe en la base, no hay datos para eliminar");
+            }
         }
-        if (cont < pasajeros.size()) {
-            System.out.println("Pasajero eliminado con exito!");
-        } else {
-            System.out.println("Este pasajero no se existe en la base, no hay datos para eliminar");
-        }
-        return cont;
     }
 
     // CRUD de habitacion
@@ -159,86 +161,93 @@ public class Metodos {
         System.out.println("Seleccione la tarifa ");
         double tarifa = input.nextDouble();
         String estado = "Disponible";
-        
+
         Habitacion habitacion_nueva = new Habitacion(tipo_habitacion, numero_habitacion, tarifa, estado);
-        
+
         return habitacion_nueva;
-        
+
     }
-    
+
     public static void consultaHabitacion(ArrayList<Habitacion> habitaciones) {
         Scanner input = new Scanner(System.in);
         System.out.println("Seleccione el numero de habitacion que desea ver ");
         int resp = input.nextInt();
         int x = 0;
-        
+
         if (habitaciones.isEmpty()) {
             System.out.println("No hay habitaciones ingresadas en el sistema");
         } else {
             while (resp != habitaciones.get(x).numero_habitacion) {
-                
+
                 x++;
-                
+
                 if (resp == habitaciones.get(x).numero_habitacion) {
-                    
+
                     System.out.println("Tipo de habitacion:" + " " + habitaciones.get(x).tipo_habitacion);
                     System.out.println("Numero de habitacion:" + " " + habitaciones.get(x).numero_habitacion);
                     System.out.println("Tarifa:" + " " + habitaciones.get(x).tarifa);
-                    
+
                 } else {
-                    
+
                     System.out.println("Habitacion no encontrada ");
                 }
             }
-            
+
         }
-        
+
     }
-    
+
     public static void editarHabitacion(ArrayList<Habitacion> habitaciones) {
         Scanner input = new Scanner(System.in);
         System.out.println("Ingrese el numero de habitacion que desea editar: ");
-        
+
         int respuesta_modificar = input.nextInt();
         int contador = 0;
-        
+
         while (respuesta_modificar != habitaciones.get(contador).numero_habitacion) {
-            
+
             contador++;
         }
         if (contador < habitaciones.size()) {
-            
+
             System.out.println("Ingrese el nuevo tipo de habitacion: ");
             String nuevo_tipo = input.nextLine();
             habitaciones.get(contador).setTipo_habitacion(nuevo_tipo);
             input.nextLine();
-            
+
             System.out.println("Ingrese la nueva tarifa: ");
             int nueva_tarifa = input.nextInt();
             habitaciones.get(contador).setTarifa(nueva_tarifa);
-            
+
             System.out.println("Nueva habitacion creada con exito! ");
-            
+
         } else {
             System.out.println("La habitacion consultada no se encontro en la base");
         }
     }
-    
-    public static int eliminarHabitacion(ArrayList<Habitacion> habitaciones) {
+
+    public static void eliminarHabitacion(ArrayList<Habitacion> habitaciones) {
         Scanner input = new Scanner(System.in);
         System.out.println("Seleccione el numero de habitacion que desea borrar ");
         int respuesta_eliminar = input.nextInt();
         int cont = 0;
-        
-        while (respuesta_eliminar != habitaciones.get(cont).numero_habitacion) {
-            cont++;
+        boolean habitacion_existe = false;
+
+        for (int i = 0; i < habitaciones.size(); i++) {
+            if (respuesta_eliminar == habitaciones.get(i).numero_habitacion) {
+                habitaciones.remove(i);
+                habitacion_existe = true;
+                System.out.println("Tipo de habitacion eliminada con exito!");
+                break;
+
+            }
+
         }
-        if (cont < habitaciones.size()) {
-            System.out.println("Tipo de habitacion eliminada con exito!");
-        } else {
+        if (!habitacion_existe) {
+
             System.out.println("Este tipo de habitacion no existe en la base, no hay datos para eliminar");
         }
-        return cont;
+
     }
     //generador de codigos de reservas
 
@@ -267,7 +276,7 @@ public class Metodos {
         if (!existe) {
             System.out.println("Este pasajero aún no se encuentra ingresado en la base");
             System.out.println("A continuacion le pediremos unos datos para completar su ingreso al sistema");
-            
+
             pasajero.add(ingresarPasajero());
         }
         System.out.println("Ingrese la fecha de entrada para la reserva (DD/MM/AAAA): ");
@@ -287,12 +296,12 @@ public class Metodos {
             }
             cont++;
         }
-        
+
         Reserva reservaNueva = new Reserva(codigoReserva(), pasajero.get(titReserva), fechaEntrada, fechaSalida, habitacion.get(cont));
-        
+
         return reservaNueva;
     }
-    
+
     public static void modificarReserva(ArrayList<Reserva> reserva, ArrayList<Habitacion> habitacion) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Scanner input = new Scanner(System.in);
@@ -312,7 +321,7 @@ public class Metodos {
                         reserva.get(i).setFechaEntrada(NuevaEntrada);
                         break;
                     }
-                    
+
                 }
                 break;
             case 2:
@@ -321,12 +330,12 @@ public class Metodos {
                 for (int i = 0; i < reserva.size(); i++) {
                     if (titReserva == reserva.get(i).titularReserva.getDni()) {
                         reserva.get(i).setFechaSalida(NuevaSalida);
-                        
+
                         break;
                     }
                 }
                 break;
-            
+
             case 3:
                 for (int i = 0; i < reserva.size(); i++) {
                     if (titReserva == reserva.get(i).titularReserva.getDni()) {
@@ -350,11 +359,11 @@ public class Metodos {
                 } while (Nrohab != habitacion.get(cont).numero_habitacion && cont < habitacion.size());
                 break;
         }
-        
+
         System.out.println("Reserva modificada con exito");
-        
+
     }
-    
+
     public static void consultarReserva(ArrayList<Reserva> reservas) {
         Scanner input = new Scanner(System.in);
         int cont = 0;
@@ -376,7 +385,33 @@ public class Metodos {
         if (!existe) {
             System.out.println("No hay reservas existentes con la CI indicada.");
         }
-        
+
     }
-    
+
+    public static void eliminarReserva(ArrayList<Reserva> reservas) {
+        Scanner input = new Scanner(System.in);
+        boolean reserva_encontrada = false;
+        System.out.println("Ingrese el dni del titular de la reserva: ");
+        int respuesta_eliminar = input.nextInt();
+
+        if (reservas.isEmpty()) {
+            System.out.println("No hay reservas ingresadas en el sistema");
+        } else {
+            for (int i = 0; i < reservas.size(); i++) {
+
+                if (respuesta_eliminar == reservas.get(i).titularReserva.dni) {
+                    reservas.remove(i);
+                    reserva_encontrada = true;
+                    break;
+
+                }
+                if (!reserva_encontrada) {
+
+                    System.out.println("Reserva inexistente intente de nuevo por favor ");
+
+                }
+            }
+        }
+    }
+        
 }
