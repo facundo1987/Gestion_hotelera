@@ -63,28 +63,36 @@ public class Metodos {
         Scanner input = new Scanner(System.in);
         System.out.println("Seleccione el dni del pasajero que desea ver ");
         int resp = input.nextInt();
-        int x = 0;
+       
+        boolean pasajero_existe = false;
 
         if (pasajeros.isEmpty()) {
             System.out.println("No hay pasajeros ingresados en el sistema");
         } else {
-            while (resp != pasajeros.get(x).dni) {
+            
+            for (int i = 0; i < pasajeros.size(); i++) {
+                
+                if (resp == pasajeros.get(i).dni && i < pasajeros.size()) {
 
-                x++;
+                    System.out.println("Nombre:" + " " + pasajeros.get(i).nombre);
+                    System.out.println("Apellido:" + " " + pasajeros.get(i).apellido);
+                    System.out.println("Dni:" + " " + pasajeros.get(i).dni);
+                    System.out.println("Nacionalidad:" + " " + pasajeros.get(i).nacionalidad);
+                    System.out.println("Edad:" + " " + pasajeros.get(i).edad);
+                    pasajero_existe = true;
 
-                if (resp == pasajeros.get(x).dni) {
-
-                    System.out.println("Nombre:" + " " + pasajeros.get(x).nombre);
-                    System.out.println("Apellido:" + " " + pasajeros.get(x).apellido);
-                    System.out.println("Dni:" + " " + pasajeros.get(x).dni);
-                    System.out.println("Nacionalidad:" + " " + pasajeros.get(x).nacionalidad);
-                    System.out.println("Edad:" + " " + pasajeros.get(x).edad);
-
-                } else {
-
-                    System.out.println("Pasajero no encontrado ");
-                }
             }
+                }
+
+                 if (!pasajero_existe) {
+                
+                    System.out.println("Pasajero no encontrado ");
+                    
+                }
+   
+            
+                
+            
 
         }
 
@@ -114,12 +122,13 @@ public class Metodos {
 
             System.out.println("Ingrese el nuevo dni del pasajero:");
             int nuevoDni = input.nextInt();
-            pasajeros.get(contador).setApellido(nuevoApellido);
+            pasajeros.get(contador).setDni(nuevoDni);
 
             System.out.println("Ingrese la nueva nacionalidad del pasajero:");
+            input.nextLine();
             String nuevaNacionalidad = input.nextLine();
             pasajeros.get(contador).setNacionalidad(nuevaNacionalidad);
-            input.nextLine();
+            
 
             System.out.println("Ingrese la nueva edad del pasajero:");
             int nuevaEdad = input.nextInt();
@@ -381,6 +390,7 @@ public class Metodos {
                 do {
                     if (habitacion.get(cont).numero_habitacion == Nrohab) {
                         habitacion.get(cont).setEstado("Ocupado");
+                        System.out.println(habitacion.get(cont).numero_habitacion);
                         reserva.get(nroReserva).setHabitacion(habitacion.get(cont));
                     }
                     cont++;

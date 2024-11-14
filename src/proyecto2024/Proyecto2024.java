@@ -38,7 +38,7 @@ public class Proyecto2024 {
 
         //Lista de reservas y agregamos un caso para prueba
         ArrayList<Reserva> reservas = new ArrayList();
-
+        
         Scanner input = new Scanner(System.in);
         int opcion;
         int option;
