@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Random;
 import java.text.ParseException;
+import java.util.concurrent.TimeUnit;
 
 public class Metodos {
 
@@ -39,8 +40,7 @@ public class Metodos {
         System.out.println("4 ---- Eliminar reserva");
     }
 
-    //metodos de la clase pasajero
-    public static Pasajero ingresarPasajero() {
+   public static Pasajero ingresarPasajero() {
         Scanner input = new Scanner(System.in);
         System.out.println("Cual es el nombre del pasajero  ");
         String nombre = input.nextLine();
@@ -132,10 +132,8 @@ public class Metodos {
         }
     }
 
-    public static void eliminarPasajero(ArrayList<Pasajero> pasajeros) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Seleccione dni del pasajero que desea borrar ");
-        int respuesta_eliminar = input.nextInt();
+    public static void eliminarPasajero(ArrayList<Pasajero> pasajeros, int respuesta_eliminar) {
+
         boolean existe_pasajero = false;
 
         for (int i = 0; i < pasajeros.size(); i++) {
@@ -145,10 +143,11 @@ public class Metodos {
                 existe_pasajero = true;
                 break;
             }
-            if (!existe_pasajero) {
+            
+        }
+        if (!existe_pasajero) {
                 System.out.println("Este pasajero no existe en la base, no hay datos para eliminar");
             }
-        }
     }
 
     // CRUD de habitacion
@@ -283,6 +282,17 @@ public class Metodos {
         Date fechaEntrada = formato.parse(input.next());
         System.out.println("Ingrese la fecha de salida para la reserva (DD/MM/AAAA): ");
         Date fechaSalida = formato.parse(input.next());
+        //cambio
+        long dif = fechaSalida.getTime() - fechaEntrada.getTime();
+        long dias = TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS);
+        while (dias <=0){
+            System.out.println("ERROR, la fecha de salida debe ser posterior a la de ingreso");
+            System.out.println("ingrese fecha de salida nuevamente");
+            fechaSalida = formato.parse(input.next());
+            dif = fechaSalida.getTime() - fechaEntrada.getTime();
+            dias = TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS);
+        }
+        //
         System.out.println("Ingrese el N° de habitacion entre las disponibles");
         for (int i = 0; i < habitacion.size(); i++) {
             if (habitacion.get(i).estado.equals("Disponible")) {
@@ -319,6 +329,14 @@ public class Metodos {
                 for (int i = 0; i < reserva.size(); i++) {
                     if (titReserva == reserva.get(i).titularReserva.getDni()) {
                         reserva.get(i).setFechaEntrada(NuevaEntrada);
+                        //cambio
+                        while (reserva.get(i).dias() <= 0) {
+                            System.out.println("La fecha ingresada es posterior a la salida por lo que no puede ser ingresada");
+                            System.out.println("Recuerde que la fecha de entrada debe ser anterior a la salida, ingrese nuevamente la fecha de entrada:");
+                            NuevaEntrada = formato.parse(input.next());
+                            reserva.get(i).setFechaEntrada(NuevaEntrada);
+                        }
+                        //
                         break;
                     }
 
@@ -330,16 +348,26 @@ public class Metodos {
                 for (int i = 0; i < reserva.size(); i++) {
                     if (titReserva == reserva.get(i).titularReserva.getDni()) {
                         reserva.get(i).setFechaSalida(NuevaSalida);
-
+                        //cambio
+                        while (reserva.get(i).dias() <= 0) {
+                            System.out.println("La fecha ingresada es anterior a la fecha de ingreso");
+                            System.out.println("Recuerde que la fecha de entrada debe ser anterior a la salida, ingrese nuevamente la fecha de entrada:");
+                            NuevaSalida = formato.parse(input.next());
+                            reserva.get(i).setFechaSalida(NuevaSalida);
+                        }
+                        //
                         break;
                     }
                 }
                 break;
 
             case 3:
+                int nroReserva = 0;
                 for (int i = 0; i < reserva.size(); i++) {
                     if (titReserva == reserva.get(i).titularReserva.getDni()) {
                         reserva.get(i).habitacion.setEstado("Disponible");
+                        nroReserva = i;
+                        break;
                     }
                 }
                 System.out.println("Seleccione la nueva habitacion reservada:");
@@ -353,10 +381,11 @@ public class Metodos {
                 do {
                     if (habitacion.get(cont).numero_habitacion == Nrohab) {
                         habitacion.get(cont).setEstado("Ocupado");
-                        reserva.get(cont).setHabitacion(habitacion.get(cont));
+                        reserva.get(nroReserva).setHabitacion(habitacion.get(cont));
                     }
                     cont++;
                 } while (Nrohab != habitacion.get(cont).numero_habitacion && cont < habitacion.size());
+
                 break;
         }
 
@@ -374,7 +403,9 @@ public class Metodos {
             if (dni == reservas.get(cont).getTitularReserva().dni) {
                 existe = true;
                 System.out.println("Esta es la informacion de la reserva consultada:");
+                System.out.println("Codigo de reserva: " + reservas.get(cont).codigo);
                 System.out.println("Titular: " + dni);
+                System.out.println("Habitacion: " + reservas.get(cont).habitacion.getNumero_habitacion() + " " + reservas.get(cont).habitacion.getTipo_habitacion());
                 System.out.println("Fecha de ingreso: " + reservas.get(cont).fechaEntrada);
                 System.out.println("Fecha de salida: " + reservas.get(cont).fechaSalida);
                 System.out.println("Canitdad de noches: " + reservas.get(cont).dias());
@@ -388,30 +419,27 @@ public class Metodos {
 
     }
 
-    public static void eliminarReserva(ArrayList<Reserva> reservas) {
-        Scanner input = new Scanner(System.in);
+    public static void eliminarReserva(ArrayList<Reserva> reservas, int dniPasajero) {
+
         boolean reserva_encontrada = false;
-        System.out.println("Ingrese el dni del titular de la reserva: ");
-        int respuesta_eliminar = input.nextInt();
 
         if (reservas.isEmpty()) {
-            System.out.println("No hay reservas ingresadas en el sistema");
+            System.out.println("No hay reservas ingresadas en el sistema para eliminar");
         } else {
             for (int i = 0; i < reservas.size(); i++) {
 
-                if (respuesta_eliminar == reservas.get(i).titularReserva.dni) {
+                if (dniPasajero == reservas.get(i).titularReserva.dni) {
                     reservas.remove(i);
                     reserva_encontrada = true;
+                    System.out.println("Reserva vinculada al pasajero eliminada");
                     break;
-
                 }
                 if (!reserva_encontrada) {
 
-                    System.out.println("Reserva inexistente intente de nuevo por favor ");
+                    System.out.println("No hay reservas vinculadas a este pasajero que se deban eliminar ");
 
                 }
             }
         }
-    }
-        
+    }        
 }

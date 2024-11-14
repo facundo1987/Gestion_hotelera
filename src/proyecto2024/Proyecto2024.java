@@ -45,7 +45,7 @@ public class Proyecto2024 {
         boolean continuo = true;  // NO SE ESTA UTILIZANDO, CONSULTAR A FACU SU IDDEA
 
         while (continuo) {
-            //mostramos panel general
+         //mostramos panel general
             Metodos.panelGestionGeneral();
             option = input.nextInt();
 
@@ -76,9 +76,10 @@ public class Proyecto2024 {
                             break;
 
                         case 4:
-
-                            Metodos.eliminarPasajero(pasajeros);
-
+                            System.out.println("Seleccione dni del pasajero que desea borrar ");
+                            int respuesta_eliminar = input.nextInt();
+                            Metodos.eliminarPasajero(pasajeros, respuesta_eliminar);
+                            Metodos.eliminarReserva(reservas, respuesta_eliminar);
                             break;
 
                         default:
@@ -139,13 +140,16 @@ public class Proyecto2024 {
                             Metodos.consultarReserva(reservas);
                             break;
                         case 4:
-                            Metodos.eliminarReserva(reservas);
+                            System.out.println("Ingrese el dni del titular de la reserva: ");
+                            int respuesta_eliminar = input.nextInt();
+                            Metodos.eliminarReserva(reservas, respuesta_eliminar);
 
                             break;
-
+                        default:
+                            System.out.println("Opcion no valida");
                     }
                     break;
-                    
+
                 case 4:
                     System.out.println("Gracias por elegir Gestion Hotelera!");
                     continuo = false;
