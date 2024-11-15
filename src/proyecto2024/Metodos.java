@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Metodos {
 
-    // Joptionpane.showinputdialog
+   // Joptionpane.showinputdialog
     //Msj para menu general de gestiones
     // probando git nnnnnn
     public static void panelGestionGeneral() {
@@ -40,7 +40,7 @@ public class Metodos {
         System.out.println("4 ---- Eliminar reserva");
     }
 
-   public static Pasajero ingresarPasajero() {
+    public static Pasajero ingresarPasajero() {
         Scanner input = new Scanner(System.in);
         System.out.println("Cual es el nombre del pasajero  ");
         String nombre = input.nextLine();
@@ -63,15 +63,15 @@ public class Metodos {
         Scanner input = new Scanner(System.in);
         System.out.println("Seleccione el dni del pasajero que desea ver ");
         int resp = input.nextInt();
-       
+
         boolean pasajero_existe = false;
 
         if (pasajeros.isEmpty()) {
             System.out.println("No hay pasajeros ingresados en el sistema");
         } else {
-            
+
             for (int i = 0; i < pasajeros.size(); i++) {
-                
+
                 if (resp == pasajeros.get(i).dni && i < pasajeros.size()) {
 
                     System.out.println("Nombre:" + " " + pasajeros.get(i).nombre);
@@ -81,18 +81,14 @@ public class Metodos {
                     System.out.println("Edad:" + " " + pasajeros.get(i).edad);
                     pasajero_existe = true;
 
+                }
             }
-                }
 
-                 if (!pasajero_existe) {
-                
-                    System.out.println("Pasajero no encontrado ");
-                    
-                }
-   
-            
-                
-            
+            if (!pasajero_existe) {
+
+                System.out.println("Pasajero no encontrado ");
+
+            }
 
         }
 
@@ -128,7 +124,6 @@ public class Metodos {
             input.nextLine();
             String nuevaNacionalidad = input.nextLine();
             pasajeros.get(contador).setNacionalidad(nuevaNacionalidad);
-            
 
             System.out.println("Ingrese la nueva edad del pasajero:");
             int nuevaEdad = input.nextInt();
@@ -152,11 +147,11 @@ public class Metodos {
                 existe_pasajero = true;
                 break;
             }
-            
+
         }
         if (!existe_pasajero) {
-                System.out.println("Este pasajero no existe en la base, no hay datos para eliminar");
-            }
+            System.out.println("Este pasajero no existe en la base, no hay datos para eliminar");
+        }
     }
 
     // CRUD de habitacion
@@ -180,25 +175,26 @@ public class Metodos {
         Scanner input = new Scanner(System.in);
         System.out.println("Seleccione el numero de habitacion que desea ver ");
         int resp = input.nextInt();
-        int x = 0;
-
+        
+        boolean existe = false;
         if (habitaciones.isEmpty()) {
             System.out.println("No hay habitaciones ingresadas en el sistema");
         } else {
-            while (resp != habitaciones.get(x).numero_habitacion) {
+            for (int i = 0; i < habitaciones.size(); i++) {
+                
+                if (resp == habitaciones.get(i).numero_habitacion) {
 
-                x++;
-
-                if (resp == habitaciones.get(x).numero_habitacion) {
-
-                    System.out.println("Tipo de habitacion:" + " " + habitaciones.get(x).tipo_habitacion);
-                    System.out.println("Numero de habitacion:" + " " + habitaciones.get(x).numero_habitacion);
-                    System.out.println("Tarifa:" + " " + habitaciones.get(x).tarifa);
-
-                } else {
-
-                    System.out.println("Habitacion no encontrada ");
+                    System.out.println("Tipo de habitacion:" + " " + habitaciones.get(i).tipo_habitacion);
+                    System.out.println("Numero de habitacion:" + " " + habitaciones.get(i).numero_habitacion);
+                    System.out.println("Tarifa:" + " " + habitaciones.get(i).tarifa);
+                    System.out.println("Estado: " + habitaciones.get(i).estado);
+                    existe = true;
+                    break;
                 }
+                
+            }
+            if (!existe) {
+                System.out.println("La habitacion ingresada no existe");
             }
 
         }
@@ -294,7 +290,7 @@ public class Metodos {
         //cambio
         long dif = fechaSalida.getTime() - fechaEntrada.getTime();
         long dias = TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS);
-        while (dias <=0){
+        while (dias <= 0) {
             System.out.println("ERROR, la fecha de salida debe ser posterior a la de ingreso");
             System.out.println("ingrese fecha de salida nuevamente");
             fechaSalida = formato.parse(input.next());
@@ -350,6 +346,7 @@ public class Metodos {
                     }
 
                 }
+                System.out.println("Reserva modificada con exito");
                 break;
             case 2:
                 System.out.println("Ingrese la nueva fecha de salida:");
@@ -368,38 +365,46 @@ public class Metodos {
                         break;
                     }
                 }
+                System.out.println("Reserva modificada con exito");
                 break;
 
             case 3:
+                if (disponibilidad(habitacion)){
                 int nroReserva = 0;
                 for (int i = 0; i < reserva.size(); i++) {
                     if (titReserva == reserva.get(i).titularReserva.getDni()) {
-                        reserva.get(i).habitacion.setEstado("Disponible");
+                        cambiarEstadoHabit(habitacion, reserva.get(i).habitacion.numero_habitacion);
                         nroReserva = i;
                         break;
                     }
                 }
                 System.out.println("Seleccione la nueva habitacion reservada:");
                 for (int i = 0; i < habitacion.size(); i++) {
-                    if (habitacion.get(i).estado.equals("Disponible")) {
+                    if (habitacion.get(i).estado.equals("Disponible") && habitacion.get(i).numero_habitacion != reserva.get(nroReserva).habitacion.numero_habitacion) {
                         System.out.println("Habitacion " + habitacion.get(i).numero_habitacion + " tipo " + habitacion.get(i).tipo_habitacion);
                     }
                 }
                 int Nrohab = input.nextInt();
-                int cont = 0;
-                do {
-                    if (habitacion.get(cont).numero_habitacion == Nrohab) {
-                        habitacion.get(cont).setEstado("Ocupado");
-                        System.out.println(habitacion.get(cont).numero_habitacion);
-                        reserva.get(nroReserva).setHabitacion(habitacion.get(cont));
-                    }
-                    cont++;
-                } while (Nrohab != habitacion.get(cont).numero_habitacion && cont < habitacion.size());
+                
+                for (int i=0; i<habitacion.size(); i++){
+                    if (habitacion.get(i).numero_habitacion == Nrohab) {
+                        cambiarEstadoHabit(habitacion, habitacion.get(i).numero_habitacion);
 
+                        reserva.get(nroReserva).setHabitacion(habitacion.get(i));
+                        break;
+                    }
+                    
+                } 
+                System.out.println("Reserva modificada con exito");
+                }else{
+                    System.out.println("Todas las habitaciones estan ocupadas por lo que no se puede modificar la misma");
+                }
                 break;
+            default:
+                System.out.println("Opcion no valida.");
         }
 
-        System.out.println("Reserva modificada con exito");
+        
 
     }
 
@@ -451,5 +456,30 @@ public class Metodos {
                 }
             }
         }
-    }        
+    }
+
+//metodo para cambiar estado de habitacion
+    public static void cambiarEstadoHabit(ArrayList<Habitacion> habitaciones, int Nrohabitacion) {
+        for (int i = 0; i < habitaciones.size(); i++) {
+            if (habitaciones.get(i).numero_habitacion == Nrohabitacion) {
+                if (habitaciones.get(i).estado.equals("Disponible")) {
+                    habitaciones.get(i).setEstado("Ocupado");
+                } else {
+                    habitaciones.get(i).setEstado("Disponible");
+                }
+            }
+        }
+    }
+    
+    //metodo para saber si hay habitaciones disponibles
+    public static boolean disponibilidad(ArrayList <Habitacion> habitaciones){
+        boolean disponibles = false;
+        for (int i = 0; i < habitaciones.size(); i++) {
+            if (habitaciones.get(i).estado.equals("Disponible")) {
+                disponibles = true;
+            }
+            
+        }
+        return disponibles;
+    }
 }

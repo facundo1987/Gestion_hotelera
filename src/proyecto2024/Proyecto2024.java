@@ -7,7 +7,7 @@ public class Proyecto2024 {
 
     public static void main(String[] args) throws ParseException {
 
-        ArrayList<Pasajero> pasajeros = new ArrayList();
+       ArrayList<Pasajero> pasajeros = new ArrayList();
 
         //Agregamos pasajeros para poder testear luego el sistema
         Pasajero huesped_1 = new Pasajero("Facundo", "Bustamante", 46390835, "Uruguay", 37);
@@ -29,23 +29,38 @@ public class Proyecto2024 {
         //Agregamos habitaciones para poder testear luego el sistema
         ArrayList<Habitacion> habitaciones = new ArrayList();
 
-        Habitacion habitacion_1 = new Habitacion("Premium", 103, 80.0, "Disponible");
+        Habitacion habitacion_1 = new Habitacion("Premium", 103, 80.0, "Ocupada");
         habitaciones.add(habitacion_1);
-        Habitacion habitacion_2 = new Habitacion("Excecutive", 201, 50.0, "Disponible");
+        Habitacion habitacion_2 = new Habitacion("Excecutive", 201, 50.0, "Ocupada");
         habitaciones.add(habitacion_2);
         Habitacion habitacion_3 = new Habitacion("Suite", 302, 120.0, "Ocupada");
         habitaciones.add(habitacion_3);
 
         //Lista de reservas y agregamos un caso para prueba
         ArrayList<Reserva> reservas = new ArrayList();
+
+// Crear fechas usando Calendar
+        Calendar calendar = Calendar.getInstance();
+
+// Fecha de inicio (15 de noviembre de 2024)
+        calendar.set(2024, Calendar.NOVEMBER, 15);
+        Date fechaInicio = calendar.getTime();
+
+// Fecha de fin (20 de noviembre de 2024)
+        calendar.set(2024, Calendar.NOVEMBER, 20);
+        Date fechaFin = calendar.getTime();
         
+//Agregamos reserva para prueba
+        Reserva r1 = new Reserva(0, huesped_4, fechaInicio, fechaFin, habitacion_3);
+        reservas.add(r1);
+
         Scanner input = new Scanner(System.in);
         int opcion;
         int option;
         boolean continuo = true;  // NO SE ESTA UTILIZANDO, CONSULTAR A FACU SU IDDEA
 
         while (continuo) {
-         //mostramos panel general
+            //mostramos panel general
             Metodos.panelGestionGeneral();
             option = input.nextInt();
 
@@ -129,9 +144,13 @@ public class Proyecto2024 {
 
                     switch (opcion) {
                         case 1:
+                            if (Metodos.disponibilidad(habitaciones)){
                             reservas.add(Metodos.ingresarReserva(pasajeros, habitaciones));
 
                             System.out.println("Reserva ingresada al sistema correctamente");
+                            } else{
+                                System.out.println("No hay habitaciones disponibles, por lo que no se pueden igresar nuevas reservas");
+                            }
                             break;
                         case 2:
                             Metodos.modificarReserva(reservas, habitaciones);
