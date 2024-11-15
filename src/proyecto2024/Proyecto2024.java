@@ -7,7 +7,7 @@ public class Proyecto2024 {
 
     public static void main(String[] args) throws ParseException {
 
-       ArrayList<Pasajero> pasajeros = new ArrayList();
+        ArrayList<Pasajero> pasajeros = new ArrayList();
 
         //Agregamos pasajeros para poder testear luego el sistema
         Pasajero huesped_1 = new Pasajero("Facundo", "Bustamante", 46390835, "Uruguay", 37);
@@ -49,7 +49,7 @@ public class Proyecto2024 {
 // Fecha de fin (20 de noviembre de 2024)
         calendar.set(2024, Calendar.NOVEMBER, 20);
         Date fechaFin = calendar.getTime();
-        
+
 //Agregamos reserva para prueba
         Reserva r1 = new Reserva(0, huesped_4, fechaInicio, fechaFin, habitacion_3);
         reservas.add(r1);
@@ -144,25 +144,40 @@ public class Proyecto2024 {
 
                     switch (opcion) {
                         case 1:
-                            if (Metodos.disponibilidad(habitaciones)){
-                            reservas.add(Metodos.ingresarReserva(pasajeros, habitaciones));
+                            if (Metodos.disponibilidad(habitaciones)) {
+                                reservas.add(Metodos.ingresarReserva(pasajeros, habitaciones));
 
-                            System.out.println("Reserva ingresada al sistema correctamente");
-                            } else{
+                                System.out.println("Reserva ingresada al sistema correctamente");
+                            } else {
                                 System.out.println("No hay habitaciones disponibles, por lo que no se pueden igresar nuevas reservas");
                             }
                             break;
                         case 2:
-                            Metodos.modificarReserva(reservas, habitaciones);
+                            if (reservas.isEmpty()) {
+
+                                System.out.println("No hay reservas en el sistema");
+
+                            } else {
+
+                                Metodos.modificarReserva(reservas, habitaciones);
+                            }
+
                             break;
                         case 3:
-                            Metodos.consultarReserva(reservas);
+                            if (reservas.isEmpty()) {
+                                System.out.println("No hay reservas ingresadas en el sistema como para modificar");
+                            } else {
+                                Metodos.consultarReserva(reservas);
+                            }
                             break;
                         case 4:
-                            System.out.println("Ingrese el dni del titular de la reserva: ");
-                            int respuesta_eliminar = input.nextInt();
-                            Metodos.eliminarReserva(reservas, respuesta_eliminar);
-
+                            if (reservas.isEmpty()) {
+                                System.out.println("No hay reservas ingresadas en el sistema como para eliminar");
+                            } else {
+                                System.out.println("Ingrese el dni del titular de la reserva: ");
+                                int respuesta_eliminar = input.nextInt();
+                                Metodos.eliminarReserva(reservas, respuesta_eliminar);
+                            }
                             break;
                         default:
                             System.out.println("Opcion no valida");

@@ -8,38 +8,25 @@ import java.util.concurrent.TimeUnit;
 
 public class Metodos {
 
-   // Joptionpane.showinputdialog
-    //Msj para menu general de gestiones
-    // probando git nnnnnn
-    public static void panelGestionGeneral() {
-        System.out.println("Bienvenido al menu general del sistema hotelero ");
-        System.out.println("1 ---- Pasajeros");
-        System.out.println("2 ---- Habitaciones");
-        System.out.println("3 ---- Reservas");
-        System.out.println("4 ---- Salir");
+public static void panelGestionGeneral() {
+        System.out.println("Bienvenidos al menu general del sistema hotelero\n1 - Huesped \n2 - Habitaciones\n3 - Reservas\n4 - Salir");
+        System.out.print("Opcion: ");
     }
 
     public static void panelPasajeros() {
-        System.out.println("1 ---- Ingresar nuevo pasajero");
-        System.out.println("2 ---- Consultar pasajero");
-        System.out.println("3---- Editar pasajero");
-        System.out.println("4 ---- Borrar pasajero");
+        System.out.println("1 - Ingresar nuevo huesped\n2 - Consulta huesped\n3 - Editar huesped\n4 - Borrar huesped");
+        System.out.println("Opcion: ");
     }
 
     public static void panelHabitaciones() {
-        System.out.println("1 ---- Crear nueva habitacion");
-        System.out.println("2 ---- Ver habitacion");
-        System.out.println("3---- Editar habitacion");
-        System.out.println("4 ---- Borrar habitacion");
+        System.out.println("1 - Crear nueva habitacion\n2 - Ver habitacion\n3 - Editar habitacion\n4 - Borrar habitacion");
+        System.out.print("Opcion: ");
     }
 
     public static void panelReservas() {
-        System.out.println("1 ---- Ingresar nueva reserva");
-        System.out.println("2 ---- Modificar reserva");
-        System.out.println("3 ---- Consultar reserva");
-        System.out.println("4 ---- Eliminar reserva");
+        System.out.println("1 - Ingresar nueva reserva\n2 - Modificar reserva\n3 - Consultar reserva\n4 - Eliminar reserva");
+        System.out.print("Opcion: ");
     }
-
     public static Pasajero ingresarPasajero() {
         Scanner input = new Scanner(System.in);
         System.out.println("Cual es el nombre del pasajero  ");
@@ -49,8 +36,9 @@ public class Metodos {
         System.out.println("ingrese dni ");
         int dni = input.nextInt();
         System.out.println("Ingrese nacionalidad  ");
-        String nacionalidad = input.nextLine();
         input.nextLine();
+        String nacionalidad = input.nextLine();
+        
         System.out.println("ingrese edad ");
         int edad = input.nextInt();
 
@@ -173,6 +161,9 @@ public class Metodos {
 
     public static void consultaHabitacion(ArrayList<Habitacion> habitaciones) {
         Scanner input = new Scanner(System.in);
+        System.out.println("Habitacio "+habitaciones.get(0).getNumero_habitacion()+": "+habitaciones.get(0).getTipo_habitacion()+" Costo por dia: US$ "+habitaciones.get(0).getTarifa());
+        System.out.println("Habitacio "+habitaciones.get(1).getNumero_habitacion()+": "+habitaciones.get(1).getTipo_habitacion()+" Costo por dia: US$ "+habitaciones.get(1).getTarifa());
+        System.out.println("Habitacio "+habitaciones.get(2).getNumero_habitacion()+": "+habitaciones.get(2).getTipo_habitacion()+" Costo por dia: US$ "+habitaciones.get(2).getTarifa());
         System.out.println("Seleccione el numero de habitacion que desea ver ");
         int resp = input.nextInt();
         
@@ -215,9 +206,10 @@ public class Metodos {
         if (contador < habitaciones.size()) {
 
             System.out.println("Ingrese el nuevo tipo de habitacion: ");
+            input.nextLine();
             String nuevo_tipo = input.nextLine();
             habitaciones.get(contador).setTipo_habitacion(nuevo_tipo);
-            input.nextLine();
+            
 
             System.out.println("Ingrese la nueva tarifa: ");
             int nueva_tarifa = input.nextInt();
@@ -447,6 +439,7 @@ public class Metodos {
                     reservas.remove(i);
                     reserva_encontrada = true;
                     System.out.println("Reserva vinculada al pasajero eliminada");
+                    reserva_encontrada = true;
                     break;
                 }
                 if (!reserva_encontrada) {
